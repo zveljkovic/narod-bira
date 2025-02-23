@@ -1,0 +1,291 @@
+@use '_reset.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap');
+@mixin font-source-sans-3 {
+  font-family: "Source Sans 3", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+$color-white: #fff;
+$color-dark: #222222;
+$color-red: #602020;
+$color-support: #246a17;
+$color-abstain: #ddae0c;
+$color-against: #e40a0a;
+
+.bg1 {
+  background-image: url('https://picsum.photos/1920/1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  overscroll-behavior: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: block;
+}
+
+.icon-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+#main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 80%;
+
+  h1 {
+    @include font-source-sans-3;
+    font-size: 50px;
+    color: $color-white;
+  }
+
+  h2 {
+    @include font-source-sans-3;
+    font-size: 30px;
+    color: $color-white;
+  }
+
+  .buttons {
+    margin-top: 50px;
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    button {
+      border: 1px solid $color-white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: transparent;
+      color: $color-white;
+      cursor: pointer;
+
+
+      &:hover {
+        background-color: $color-white;
+        color: #000;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+@mixin dialog {
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  right: 10%;
+  bottom: 5%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: "Source Sans 3", serif;
+}
+
+#vote {
+  @include dialog;
+
+  h1 {
+    @include font-source-sans-3;
+    font-size: 50px;
+    color: $color-dark;
+    text-align: center;
+  }
+
+  .error {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: $color-red;
+  }
+
+  .buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    button {
+      border: 1px solid $color-dark;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: transparent;
+      color: $color-dark;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $color-dark;
+        color: $color-white;
+        transition: all 0.3s ease-in-out;
+      }
+
+      &.green {
+        border: 1px solid $color-support;
+        color: $color-support;
+
+        &:hover {
+          background-color: $color-support;
+          color: $color-white;
+        }
+      }
+
+
+      &.yellow {
+        border: 1px solid $color-abstain;
+        color: $color-abstain;
+        &:hover {
+          background-color: $color-abstain;
+          color: $color-white;
+        }
+      }
+
+
+      &.red {
+        border: 1px solid $color-against;
+        color: $color-against;
+        &:hover {
+          background-color: $color-against;
+          color: $color-white;
+        }
+      }
+    }
+  }
+}
+
+#question-list {
+  @include dialog;
+  padding-top: 70px;
+
+  ul {
+    list-style: none;
+    margin: 10px 0 0 0;
+    li {
+      margin-bottom: 10px;
+      padding: 10px 0;
+    }
+  }
+
+  .item-header {
+    display: flex;
+  }
+
+  .heading {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+  }
+
+  .main-wrapper {
+    position: absolute;
+    top: 70px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    overflow: scroll;
+  }
+
+  h1 {
+    @include font-source-sans-3;
+    font-size: 50px;
+    color: $color-dark;
+    text-align: center;
+    width: 100%;
+  }
+
+  h2 {
+    @include font-source-sans-3;
+    font-size: 24px;
+    color: $color-dark;
+  }
+
+  .button {
+    border: 1px solid black;
+    background: transparent;
+    text-transform: uppercase;
+    font-family: "Source Sans 3", serif;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+
+
+  main {
+    b {
+      font-weight: bold;
+    }
+    .notice {
+      margin: 10px 0;
+      font-style: italic;
+      font-size: 12px;
+    }
+    .stats {
+      margin-top: 10px;
+    }
+  }
+
+  form {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    flex-direction: column;
+    margin-top: 10px;
+    .horizontal {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+    .vertical {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .error {
+      margin: 10px 0 0;
+      font-size: 14px;
+      color: $color-red;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    input, textarea {
+      width: 100%;
+      background: transparent;
+    }
+  }
+}
+
+
+.footer {
+  @include font-source-sans-3;
+  font-size: 12px;
+  color: $color-white;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}

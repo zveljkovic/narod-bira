@@ -1,0 +1,25 @@
+<button class="close icon-button" hx-on:click="showSection('main')">
+    <span class="material-symbols-outlined">close</span>
+</button>
+<h1><%= question.title %></h1>
+<%= question.description %>
+<% if (generalError) { %>
+<p><%= generalError %></p>
+<% } %>
+<div class="buttons">
+    <button class="green"
+            hx-post="/vote/support"
+            hx-ext='json-enc'
+            hx-vals='{"sessionId": "<%= sessionId %>", "id": "<%= question.id %>"}'
+            hx-target="#vote">Podržavam</button>
+    <button class="yellow"
+            hx-post="/vote/sustained"
+            hx-ext='json-enc'
+            hx-vals='{"sessionId": "<%= sessionId %>", "id": "<%= question.id %>"}'
+            hx-target="#vote">Uzdržan</button>
+    <button class="red"
+            hx-post="/vote/against"
+            hx-ext='json-enc'
+            hx-vals='{"sessionId": "<%= sessionId %>", "id": "<%= question.id %>"}'
+            hx-target="#vote">Nepodržavam</button>
+</div>

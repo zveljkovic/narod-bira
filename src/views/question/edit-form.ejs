@@ -1,0 +1,27 @@
+<form id="question-form"
+      hx-post="/question/edit"
+      hx-target="closest li"
+      hx-ext="json-enc">
+        <input type="hidden" name="sessionId" value="<%= sessionId %>">
+        <input type="hidden" name="id" value="<%= questionId %>">
+        <% if (generalError !== '') { %>
+            <div class="error"><%= generalError %></div>
+        <% } %>
+        <div class="horizontal">
+            <div class="vertical">
+                <label>Naslov</label>
+                <textarea rows="5" name="title" placeholder="Unesite naslov (text)"><%= title %></textarea>
+                <% if (titleError !== '') { %>
+                    <div class="error"><%= titleError %></div>
+                <% } %>
+            </div>
+            <div class="vertical">
+                <label>Opis</label>
+                <textarea rows="5" name="description" placeholder="Unesite opis (markdown)"><%= description %></textarea>
+                <% if (descriptionError !== '') { %>
+                    <div class="error"><%= descriptionError %></div>
+                <% } %>
+            </div>
+        </div>
+        <input type="submit" value="Izmeni" class="button">
+    </form>

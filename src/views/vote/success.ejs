@@ -1,0 +1,10 @@
+<button class="close icon-button" hx-on:click="showSection('main')">
+    <span class="material-symbols-outlined">close</span>
+</button>
+<h1><%= question.title %></h1>
+<p>Vaš glas je uspešno zabeležen.</p>
+<div class="buttons">
+    <button hx-get="/vote/question"
+            hx-vals='js:{"sessionId": getSessionId()}'
+            hx-target="#vote">Idite na sledeće pitanje</button>
+</div>

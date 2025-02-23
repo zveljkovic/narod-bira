@@ -1,0 +1,41 @@
+<header class="heading">
+    <button class="close icon-button" hx-on:click="showSection('main')">
+        <span class="material-symbols-outlined">close</span>
+    </button>
+    <h1>Pitanja</h1>
+</header>
+<main class="main-wrapper">
+    <div class="notice">Sva izmene postojećih i dodavanje novih pitanja
+        se odobravaju od admina da bi se sprečio spam.
+        Sve odluke o dodavanju ili izmeni biće javne i
+        prikazane na stranici <a href="/review">pregled izmena</a></div>
+    <button class="button"
+            hx-get="/question/add-form"
+            hx-target="#question-form"
+            hx-swap="outerHTML"
+            hx-vals='{"sessionId": "<%= sessionId %>"}'
+    >Dodaj pitanje</button>
+    <form id="question-form"></form>
+    <ul>
+        <% for (const q of questions) { %>
+        <li>
+            <header class="item-header">
+                <h2><%= q.title %></h2>
+                <button class="icon-button"
+                        hx-get="/question/edit-form"
+                        hx-target="closest li"
+                        hx-vals='{"sessionId": "<%= sessionId %>", "id": "<%= q.id %>"}'
+                >
+                    <span class="material-symbols-outlined">edit_square</span>
+                </button>
+            </header>
+            <main>
+                <%= q.description %>
+                <div class="stats">
+                    <p>Za: <b><%= votesPerQuestion[q.id] ? votesPerQuestion[q.id].support : 0 %></b> Uzdržano: <b><%= votesPerQuestion[q.id] ? votesPerQuestion[q.id].sustained : 0 %></b> Protiv: <b><%= votesPerQuestion[q.id] ? votesPerQuestion[q.id].against : 0 %></b> Vaš glas: <b><%= !!userVotes[q.id] ? userVotes[q.id] : 'niste glasali' %></b></p>
+                </div>
+            </main>
+        </li>
+        <% } %>
+    </ul>
+</main>

@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Narod Bira | Pregled izmena</title>
+</head>
+<body>
+<% for (const s of qs) { %>
+    <% if (s.question_id) { %>
+        <p>
+            SessionId: <%= s.session_id %> je zahtevao izmenu pitanja<br>
+            Star naziv: <b><%= s.question.title %></b><br>
+            Novi naziv: <b><%= s.title %></b><br>
+            Star opis: <b><%= s.question.description %></b><br>
+            Novi opis: <b><%= s.description %></b><br>
+            Izmena <%= s.added ? 'je' : 'nije' %> odobrena uz napomenu:
+            <b><%= s.resolution %></b>
+        </p>
+    <% } else { %>
+        <p>
+            SessionId: <%= s.session_id %> je zahtevao dodavanje pitanja<br>
+            Naziv: <b><%= s.title %></b><br>
+            Opis: <b><%= s.description %></b><br>
+            Izmena <%= s.added ? 'je' : 'nije' %> odobrena uz napomenu:
+            <b><%= s.resolution %></b>
+        </p>
+    <% } %>
+<% } %>
+</body>
+</html>
