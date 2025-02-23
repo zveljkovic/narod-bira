@@ -203,6 +203,6 @@ app.get('/review', async (req, res) => {
 
 // Start the server
 const PORT = 3000;
-app.listen(PORT, () => {
+app.listen(PORT, '192.168.31.196', () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

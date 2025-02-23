@@ -15,17 +15,33 @@ $color-support: #246a17;
 $color-abstain: #ddae0c;
 $color-against: #e40a0a;
 
-.bg1 {
-  background-image: url('https://picsum.photos/1920/1080');
+.bg {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: background-image 2s ease-in-out;
+}
+.bg1 {
+  background-image: url('/images/djerdapska-klisura.webp');
+}
+.bg2 {
+  background-image: url('/images/krupanjsko-vrelo.webp');
+}
+.bg3 {
+  background-image: url('/images/pecina-stopica.webp');
+}
+.bg4 {
+  background-image: url('/images/uvac-meandri.webp');
 }
 
-body {
+html, body {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overscroll-behavior: none;
+  position: fixed;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .hidden {
@@ -93,13 +109,17 @@ body {
 @mixin dialog {
   position: absolute;
   top: 5%;
-  left: 10%;
-  right: 10%;
   bottom: 5%;
+  left: 5%;
+  right: 5%;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   padding: 10px;
   font-family: "Source Sans 3", serif;
+  @media screen and (min-width: 768px) {
+    left: 10%;
+    right: 10%;
+  }
 }
 
 #vote {
