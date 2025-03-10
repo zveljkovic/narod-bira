@@ -26,19 +26,34 @@
         <button hx-get="/vote/question"
                 hx-vals='js:{"sessionId": getSessionId()}'
                 hx-target="#vote"
-                hx-on::after-request="showSection('vote')">Započni glasanje</button>
+                hx-on::after-request="showSection('vote')">Anketar</button>
         <button hx-get="/question/list"
                 hx-vals='js:{"sessionId": getSessionId()}'
                 hx-target="#question-list"
-                hx-on::after-request="showSection('question-list')">Pregledaj pitanja</button>
+                hx-on::after-request="showSection('question-list')">Rezultati ankete i pitanja</button>
     </div>
-    <!--                hx-ext='json-enc'-->
+    <div class="buttons">
+        <button hx-get="/applications"
+                hx-vals='js:{"sessionId": getSessionId()}'
+                hx-target="#applications"
+                hx-on::after-request="showSection('applications')">Predlagač</button>
+        <button hx-get="/position/admin"
+                hx-vals='js:{"sessionId": getSessionId()}'
+                hx-target="#position-admin"
+                hx-on::after-request="showSection('position-admin')">Pozicije</button>
+    </div>
 </section>
 
 <section id="vote" class="hidden">
 </section>
 
 <section id="question-list" class="hidden">
+</section>
+
+<section id="applications" class="hidden">
+</section>
+
+<section id="position-admin" class="hidden">
 </section>
 
 <footer class="footer">&copy; 2025 <span id="session-id"></span></footer>

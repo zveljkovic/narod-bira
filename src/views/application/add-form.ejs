@@ -1,0 +1,36 @@
+<form id="application-form"
+      hx-post="/applications/add"
+      hx-swap="outerHTML"
+      hx-ext="json-enc"
+>
+    <input type="hidden" name="sessionId" value="<%= sessionId %>">
+    <input type="hidden" name="positionId" value="<%= positionId %>">
+    <% if (generalError !== '') { %>
+        <div class="error"><%= generalError %></div>
+    <% } %>
+    <div class="field">
+        <label for="applicantName">Ime i prezime</label>
+        <input type="text" id="applicantName" name="applicantName" value="<%= applicantName %>">
+        <% if (applicantNameError !== '') { %>
+            <div class="error"><%= applicantNameError %></div>
+        <% } %>
+    </div>
+    <div class="field">
+        <label for="applicantWhy">Zbog čega predlažete osobu</label>
+        <textarea id="applicantWhy" name="applicantWhy"><%= applicantWhy %></textarea>
+        <% if (applicantWhyError !== '') { %>
+            <div class="error"><%= applicantWhyError %></div>
+        <% } %>
+    </div>
+
+    <div class="field">
+        <label for="applicantBioUrl">Link do onlajn biografije</label>
+        <input type="text" id="applicantBioUrl" name="applicantBioUrl" placeholder="https://..." value="<%= applicantBioUrl %>"/>
+        <% if (applicantBioUrlError !== '') { %>
+            <div class="error"><%= applicantBioUrlError %></div>
+        <% } %>
+    </div>
+    <div class="field">
+        <button type="submit" class="styled">Predloži</button>
+    </div>
+</form>

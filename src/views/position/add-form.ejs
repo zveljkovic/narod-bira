@@ -1,0 +1,22 @@
+
+<form id="add-form" hx-post="/position/add" hx-swap="outerHTML" hx-ext="json-enc">
+    <input type="hidden" name="sessionId" value="<%= sessionId %>">
+    <% if (generalError !== '') { %>
+        <div class="error"><%= generalError %></div>
+    <% } %>
+    <div class="vertical">
+        <label>Naziv</label>
+        <input type="text" name="name" placeholder="Unesite naziv" value="<%= name %>"/>
+        <% if (nameError !== '') { %>
+            <div class="error"><%= nameError %></div>
+        <% } %>
+    </div>
+    <div class="vertical">
+        <label>Putanja</label>
+        <input type="text" name="path" value="<%= path %>" placeholder="Unesite putanju npr /vlada/ministartstvo kulture" />
+        <% if (pathError !== '') { %>
+            <div class="error"><%= pathError %></div>
+        <% } %>
+    </div>
+    <input type="submit" value="Dodaj" class="button">
+</form>

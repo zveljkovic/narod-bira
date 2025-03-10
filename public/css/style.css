@@ -330,6 +330,190 @@ html, body {
   background: transparent;
 }
 
+#applications {
+  position: absolute;
+  top: 5%;
+  bottom: 5%;
+  left: 5%;
+  right: 5%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: "Source Sans 3", serif;
+}
+@media screen and (min-width: 768px) {
+  #applications {
+    left: 10%;
+    right: 10%;
+  }
+}
+#applications h1 {
+  font-family: "Source Sans 3", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  color: #222222;
+  text-align: center;
+}
+#applications h2 {
+  font-family: "Source Sans 3", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  color: #222222;
+  margin: 20px 0;
+  text-align: center;
+}
+#applications h3 {
+  font-family: "Source Sans 3", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  color: #222222;
+  margin: 20px 0 10px 0;
+  text-align: left;
+}
+#applications select.styled {
+  border: 1px solid #222222;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #222222;
+  cursor: pointer;
+}
+#applications button.styled {
+  border: 1px solid #222222;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #222222;
+  cursor: pointer;
+}
+#applications button.styled:hover {
+  background-color: #fff;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+}
+#applications .field {
+  margin: 10px 0;
+}
+#applications .field label {
+  display: block;
+  margin: 10px 0;
+}
+#applications .field input[type=text], #applications .field textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #222222;
+  border-radius: 5px;
+  padding: 8px;
+  font-family: "Source Sans 3", serif;
+  font-size: 14px;
+}
+#applications .box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #222222;
+}
+#applications .box .spacer {
+  flex-grow: 1;
+}
+#applications .error {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #602020;
+}
+
+#position-admin {
+  position: absolute;
+  top: 5%;
+  bottom: 5%;
+  left: 5%;
+  right: 5%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: "Source Sans 3", serif;
+}
+@media screen and (min-width: 768px) {
+  #position-admin {
+    left: 10%;
+    right: 10%;
+  }
+}
+#position-admin h1 {
+  font-family: "Source Sans 3", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  color: #222222;
+  text-align: center;
+  width: 100%;
+}
+#position-admin h2 {
+  font-family: "Source Sans 3", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+  color: #222222;
+  margin: 20px 0;
+  text-align: center;
+}
+#position-admin ul .name {
+  font-weight: bold;
+}
+#position-admin .button {
+  border: 1px solid black;
+  background: transparent;
+  text-transform: uppercase;
+  font-family: "Source Sans 3", serif;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+#position-admin #add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#position-admin #add-form .error {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #602020;
+}
+#position-admin #add-form label {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+#position-admin #add-form input[type=text] {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #222222;
+  border-radius: 5px;
+  padding: 8px;
+  font-family: "Source Sans 3", serif;
+  font-size: 14px;
+}
+#position-admin #add-form input[type=text]:focus {
+  border-color: #222222;
+  outline: none;
+  box-shadow: 0 0 5px #222222;
+}
+#position-admin #add-form input[type=text]::placeholder {
+  color: #222222;
+  font-style: italic;
+}
+#position-admin #add-form .button {
+  max-width: 200px;
+}
+
 .footer {
   font-family: "Source Sans 3", serif;
   font-optical-sizing: auto;

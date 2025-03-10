@@ -143,6 +143,74 @@ FROM votes WHERE votes.session_id = $1::uuid`;
 }
 
 
+/**
+ * Gets all positions
+ *
+ * @returns {Promise<Array<{id: string, name: string, path: string}>>}
+ */
+async function getPositions() {
+    const result = await pool.query('SELECT id, name, path FROM positions ORDER BY path');
+    return result.rows;
+}
+
+
+/**
+ * Inserts a position record into the database.
+ *
+ * @param {string} name - Name of position.
+ * @param {string} path - Path of position.
+ * @returns {Promise<void>}
+ */
+async function insertPosition(name, path) {
+    await pool.query(
+        'INSERT INTO positions(name, path) VALUES ($1::text, $2::text)',
+        [name, path]
+    );
+}
+
+/**
+ * Gets positions for path
+ *
+ * @param {string} path - Path of position.
+ * @returns {Promise<Array<{id: string, name: string, path: string}>>}
+ */
+async function getPositionsForPath(path) {
+    const result = await pool.query('SELECT id, name, path FROM positions WHERE path = $1::text', [path]);
+    return result.rows;
+}
+
+/**
+ * Gets positions for path
+ *
+ * @param {string[]} positionIds - Path of position.
+ * @returns {Promise<Array<{
+ * session_id: string,
+ * position_id: string,
+ * applicant_name: string,
+ * applicant_why: string,
+ * applicant_bio_url: string,
+ * created_at: string,
+ * }>>}
+ */
+async function getApplicationsForPositions(positionIds) {
+    const sql = `
+        SELECT a.session_id, a.position_id, a.applicant_name, a.applicant_why, a.applicant_bio_url, a.created_at
+        FROM applications a
+        WHERE a.position_id = ANY($1::uuid[])
+    `;
+    const result = await pool.query(sql, [positionIds]);
+    return result.rows;
+}
+
+
+async function insertApplication(session_id, position_id, ip, applicant_name, applicant_why, applicant_bio_url) {
+    await pool.query(
+        `INSERT INTO applications(session_id, position_id, ip, applicant_name, applicant_why, applicant_bio_url) 
+         VALUES ($1::uuid, $2::uuid, $3::text, $4::text, $5::text, $6::text)`,
+        [session_id, position_id, ip, applicant_name, applicant_why, applicant_bio_url]
+    );
+}
+
 
 module.exports = {
     insertQuestionSuggestion,
@@ -158,5 +226,10 @@ module.exports = {
     hasVote,
     insertVote,
     getVoteSum,
-    getVotesForSessionId
+    getVotesForSessionId,
+    getPositions,
+    insertPosition,
+    getPositionsForPath,
+    getApplicationsForPositions,
+    insertApplication,
 }

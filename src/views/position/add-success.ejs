@@ -1,0 +1,17 @@
+<form id="question-form">
+    <p>
+        Vaš unos je uspešno sačuvan.
+    </p>
+    <form id="add-form" hx-post="/position/add" hx-swap="outerHTML" hx-ext="json-enc">
+        <input type="hidden" name="sessionId" value="<%= sessionId %>">
+        <div class="vertical">
+            <label>Naziv</label>
+            <input type="text" name="name" placeholder="Unesite naziv" />
+        </div>
+        <div class="vertical">
+            <label>Putanja</label>
+            <input type="text" name="path" placeholder="Unesite putanju npr /vlada/ministartstvo kulture" />
+        </div>
+        <input type="submit" value="Dodaj" class="button">
+    </form>
+</form>

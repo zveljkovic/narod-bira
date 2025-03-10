@@ -43,4 +43,6 @@ function showSection(section) {
     gsap.to("#main", { opacity: section === 'main' ? 1 : 0, visibility: section === 'main' ? 'visible' : 'hidden', duration });
     gsap.to("#vote", { opacity: section === 'vote' ? 1 : 0, visibility: section === 'vote' ? 'visible' : 'hidden', duration });
     gsap.to("#question-list", { opacity: section === 'question-list' ? 1 : 0, visibility: section === 'question-list' ? 'visible' : 'hidden', duration });
+    gsap.to("#applications", { opacity: section === 'applications' ? 1 : 0, visibility: section === 'applications' ? 'visible' : 'hidden', duration });
+    gsap.to("#position-admin", { opacity: section === 'position-admin' ? 1 : 0, visibility: section === 'position-admin' ? 'visible' : 'hidden', duration });
 }

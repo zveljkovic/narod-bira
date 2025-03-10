@@ -300,6 +300,169 @@ html, body {
   }
 }
 
+#applications {
+  @include dialog;
+
+  h1 {
+    @include font-source-sans-3;
+    font-size: 50px;
+    color: $color-dark;
+    text-align: center;
+  }
+
+  h2 {
+    @include font-source-sans-3;
+    font-size: 24px;
+    color: $color-dark;
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  h3 {
+    @include font-source-sans-3;
+    font-size: 24px;
+    color: $color-dark;
+    margin: 20px 0 10px 0;
+    text-align: left;
+  }
+
+  select.styled {
+    border: 1px solid $color-dark;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: $color-dark;
+    cursor: pointer;
+  }
+
+  button.styled {
+    border: 1px solid $color-dark;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: $color-dark;
+    cursor: pointer;
+
+
+    &:hover {
+      background-color: $color-white;
+      color: #000;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .field {
+    margin: 10px 0;
+
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid $color-dark;
+      border-radius: 5px;
+      padding: 8px;
+      font-family: "Source Sans 3", serif;
+      font-size: 14px;
+    }
+
+
+
+  }
+
+
+  .box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid $color-dark;
+    .spacer {
+      flex-grow: 1;
+    }
+  }
+  .error {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: $color-red;
+  }
+
+}
+
+#position-admin {
+  @include dialog;
+
+  h1 {
+    @include font-source-sans-3;
+    font-size: 50px;
+    color: $color-dark;
+    text-align: center;
+    width: 100%;
+  }
+
+
+  h2 {
+    @include font-source-sans-3;
+    font-size: 24px;
+    color: $color-dark;
+    margin: 20px 0;
+    text-align: center;
+  }
+  ul .name {font-weight: bold;}
+  .button {
+    border: 1px solid black;
+    background: transparent;
+    text-transform: uppercase;
+    font-family: "Source Sans 3", serif;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  #add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .error {
+      margin: 10px 0 0;
+      font-size: 14px;
+      color: $color-red;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: transparent;
+      border: 1px solid $color-dark;
+      border-radius: 5px;
+      padding: 8px;
+      font-family: "Source Sans 3", serif;
+      font-size: 14px;
+
+      &:focus {
+        border-color: $color-dark;
+        outline: none;
+        box-shadow: 0 0 5px $color-dark;
+      }
+
+      &::placeholder {
+        color: $color-dark;
+        font-style: italic;
+      }
+    }
+    .button {
+      max-width: 200px;
+    }
+  }
+}
+
 
 .footer {
   @include font-source-sans-3;

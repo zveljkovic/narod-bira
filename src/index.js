@@ -191,6 +191,7 @@ app.post('/question-suggestion/resolve', async (req, res) => {
     return res.json({status: 'ok', question: q});
 });
 
+
 app.get('/review', async (req, res) => {
     const qs = await db.getQuestionSuggestions();
     for (const s of qs) {
@@ -200,6 +201,133 @@ app.get('/review', async (req, res) => {
     }
     res.render('review/suggestions', {qs});
 });
+
+
+app.get('/position/admin', async (req, res) => {
+    const sessionId = req.query.sessionId;
+    const positions = await db.getPositions();
+    res.render('position/index', {sessionId, positions});
+});
+
+app.post('/position/add', async (req, res) => {
+    const sessionId = req.body.sessionId;
+    const name = req.body.name;
+    const path = req.body.path;
+    let nameError = '';
+    if (name.trim().length === 0) {
+        nameError = 'Naziv ne sme biti prazan';
+    }
+    let pathError = '';
+    if (path.trim().length === 0) {
+        pathError = 'Putanja ne sme biti prazna';
+    }
+    if (!path.trim().startsWith('/')) {
+        nameError = 'Putanja mora početi sa /';
+    }
+    let generalError = '';
+    try {
+        const ip = req.headers['x-forwarded-for'] || req.ip;
+        await db.insertPosition(name.trim(), path.trim());
+    } catch (e) {
+        generalError = "Desila se sistemska greška: " + e.message;
+    }
+    if (nameError !== '' || pathError !== '' || generalError !== '') {
+        res.render('position/add-form', {sessionId, name, nameError, path, pathError, generalError});
+    } else {
+        res.render('position/add-success', {sessionId});
+    }
+});
+
+app.get('/applications/add', async (req, res) => {
+    const sessionId = req.query.sessionId;
+    const positionId = req.query.positionId;
+    res.render('application/add-form', {
+        sessionId, positionId, generalError: null,
+        applicantName: null, applicantNameError: '',
+        applicantWhy: null, applicantWhyError: '',
+        applicantBioUrl: null, applicantBioUrlError: ''
+    });
+});
+
+
+app.post('/applications/add', async (req, res) => {
+    const sessionId = req.body.sessionId;
+    const positionId = req.body.positionId;
+    const applicantName = req.body.applicantName;
+    const applicantWhy = req.body.applicantWhy;
+    const applicantBioUrl = req.body.applicantBioUrl;
+    let applicantNameError = '';
+    if (applicantName.trim().length === 0) {
+        applicantNameError = 'Ime i prezime ne sme biti prazno';
+    }
+    let applicantWhyError = '';
+    if (applicantWhy.trim().length === 0) {
+        applicantWhyError = 'Obrazloženje ne sme biti prazno'
+    } else if (applicantWhy.trim().length < 100) {
+        applicantWhyError = 'Obrazloženje mora biti duže od 100 slova'
+    }
+
+    let applicantBioUrlError = '';
+    if (applicantBioUrl.trim().length === 0) {
+        applicantBioUrlError = 'URL biografije ne sme biti prazan';
+    } else if (!applicantBioUrl.trim().startsWith('http://') && !applicantBioUrl.trim().startsWith('https://')) {
+        applicantBioUrlError = 'URL biografije mora početi sa http:// ili https://';
+    }
+
+    let generalError = '';
+    try {
+        const ip = req.headers['x-forwarded-for'] || req.ip;
+        await db.insertApplication(sessionId, positionId, ip, applicantName.trim(), applicantWhy.trim(), applicantBioUrl.trim());
+    } catch (e) {
+        if (e.message === 'duplicate key value violates unique constraint "applications_pkey"') {
+            generalError = "Već ste predložili nekog za ovu poziciju";
+        } else {
+            generalError = "Desila se sistemska greška: " + e.message;
+        }
+    }
+    if (applicantNameError !== '' || applicantWhyError !== '' || applicantBioUrlError !== '' || generalError !== '') {
+        res.render('application/add-form', {
+            sessionId, positionId, generalError,
+            applicantName, applicantNameError,
+            applicantWhy, applicantWhyError,
+            applicantBioUrl, applicantBioUrlError,
+        });
+    } else {
+        res.render('application/add-success', {sessionId});
+    }
+
+
+});
+
+app.post('/applications/list', async (req, res) => {
+    const sessionId = req.body.sessionId;
+    const path = req.body.path;
+    const positions = await db.getPositionsForPath(path);
+    const tempApplications = await db.getApplicationsForPositions(positions.map(p => p.id));
+    const applications = tempApplications.reduce((acc, app) => {
+        if (!acc[app.position_id]) {
+            acc[app.position_id] = [];
+        }
+        acc[app.position_id].push(app);
+        return acc;
+    }, {});
+
+    res.render('application/application-list', {sessionId, positions, applications});
+});
+
+app.get('/applications', async (req, res) => {
+    console.log("applications");const sessionId = req.query.sessionId;
+    const positions = await db.getPositions();
+    // Remove duplicates
+    const paths = positions.map(p => p.path)
+        .reduce((acc, p) => {
+            if (acc.includes(p)) return acc;
+            acc.push(p);
+            return acc;
+        }, []);
+    res.render('application/index', {sessionId, paths});
+});
+
 
 // Start the server
 const PORT = 3000;

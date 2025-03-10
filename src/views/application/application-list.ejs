@@ -1,0 +1,32 @@
+<div id="application-list">
+    <ul>
+        <% for (const p of positions) { %>
+            <li>
+                <div class="box">
+                    <h3><%= p.name %></h3>
+                    <div class="spacer"></div>
+                    <button class="styled"
+                            hx-get="/applications/add"
+                            hx-target="#application-form"
+                            hx-swap="outerHTML"
+                            hx-vals='js:{"sessionId": "<%= sessionId %>", "positionId": "<%= p.id %>"}'
+                            hx-ext="json-enc"
+                    >Predloži</button>
+                </div>
+                <form id="application-form"></form>
+                <% if (applications[p.id]) { %>
+                    <% for (const a of applications[p.id]) { %>
+                        <p style="word-wrap: break-word;">
+                                <b><%= a.applicant_name %></b><br><br>
+                            <%= a.applicant_why%><br><br>
+                            <a href="<%= a.applicant_bio_url %>">Biografija</a>
+                        </p>
+                    <% } %>
+                <% } else { %>
+                    <br>
+                    <p>Nema predloženih</p>
+                <% } %>
+            </li>
+        <% } %>
+    </ul>
+</div>

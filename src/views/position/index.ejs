@@ -1,0 +1,28 @@
+<header class="heading">
+    <button class="close icon-button" hx-on:click="showSection('main')">
+        <span class="material-symbols-outlined">close</span>
+    </button>
+    <h1>Pozicije</h1>
+</header>
+<main class="main-wrapper">
+    <form id="add-form" hx-post="/position/add" hx-swap="outerHTML" hx-ext="json-enc">
+        <input type="hidden" name="sessionId" value="<%= sessionId %>">
+        <div class="vertical">
+            <label>Naziv</label>
+            <input type="text" name="name" placeholder="Unesite naziv" />
+        </div>
+        <div class="vertical">
+            <label>Putanja</label>
+            <input type="text" name="path" placeholder="Unesite putanju npr /vlada/ministartstvo kulture" />
+        </div>
+        <input type="submit" value="Dodaj" class="button">
+    </form>
+    <h2>Lista pozicija</h2>
+    <ul>
+        <% for (const p of positions) { %>
+        <li>
+            <span class="path"><%= p.path %></span>/<span class="name"><%= p.name %></span>
+        </li>
+        <% } %>
+    </ul>
+</main>

@@ -1,0 +1,27 @@
+<header class="heading">
+    <button class="close icon-button" hx-on:click="showSection('main')">
+        <span class="material-symbols-outlined">close</span>
+    </button>
+    <h1>Predlagač</h1>
+</header>
+<main class="main-wrapper">
+    <form id="path-form"
+          hx-post="/applications/list"
+          hx-target="#application-list"
+          hx-trigger="change"
+          hx-swap="outerHTML"
+          hx-ext="json-enc">
+        <input type="hidden" name="sessionId" value="<%= sessionId %>">
+        <label for="path">Odaberite putanju</label>
+        <select class="styled" name="path" id="path" >
+            <option value="" disabled selected>Odaberite</option>
+            <% for (const p of paths) { %>
+                <option value="<%= p %>"><%= p %></option>
+            <% } %>
+        </select>
+    </form>
+
+    <h2>Lista pozicija i predloga</h2>
+    <div id="application-list">Odaberite putanju za pregled</div>
+
+</main>
