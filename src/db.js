@@ -23,6 +23,11 @@ async function getQuestionSuggestion(id) {
 }
 
 
+/**
+ * Gets all question suggestions
+ *
+ * @returns {Promise<Array<{id: string, session_id: string, question_id: string, title: string, description: string, resolution: string, added: boolean, created_at: string}>>}
+ */
 async function getQuestionSuggestions() {
     const result = await pool.query('SELECT id, session_id, question_id, title, description, resolution, added, created_at FROM question_suggestions ORDER BY created_at DESC');
     return result.rows;

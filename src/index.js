@@ -195,6 +195,9 @@ app.post('/question-suggestion/resolve', async (req, res) => {
 app.get('/review', async (req, res) => {
     const qs = await db.getQuestionSuggestions();
     for (const s of qs) {
+        if (s.session_id === process.env.ADMIN_SESSION_ID) {
+            s.session_id = 'Administrator';
+        }
         if (s.question_id) {
             s.question = await db.getQuestion(s.question_id);
         }
