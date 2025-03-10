@@ -150,6 +150,7 @@ html, body {
   border-radius: 10px;
   padding: 10px;
   font-family: "Source Sans 3", serif;
+  overflow: scroll;
 }
 @media screen and (min-width: 768px) {
   #vote {
@@ -228,6 +229,7 @@ html, body {
   border-radius: 10px;
   padding: 10px;
   font-family: "Source Sans 3", serif;
+  overflow: scroll;
   padding-top: 70px;
 }
 @media screen and (min-width: 768px) {
@@ -340,6 +342,7 @@ html, body {
   border-radius: 10px;
   padding: 10px;
   font-family: "Source Sans 3", serif;
+  overflow: scroll;
 }
 @media screen and (min-width: 768px) {
   #applications {
@@ -439,6 +442,7 @@ html, body {
   border-radius: 10px;
   padding: 10px;
   font-family: "Source Sans 3", serif;
+  overflow: scroll;
 }
 @media screen and (min-width: 768px) {
   #position-admin {
