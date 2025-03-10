@@ -21,7 +21,11 @@
     <ul>
         <% for (const p of positions) { %>
         <li>
-            <span class="path"><%= p.path %></span>/<span class="name"><%= p.name %></span>
+            <% if (p.path === '/') { %>
+                /<span class="name"><%= p.name %></span>
+            <% } else {%>
+                <span class="path"><%= p.path %></span>/<span class="name"><%= p.name %></span>
+            <% } %>
         </li>
         <% } %>
     </ul>
