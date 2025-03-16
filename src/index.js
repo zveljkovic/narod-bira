@@ -16,6 +16,7 @@ app.get('/vote/question', async (req, res) => {
     const sessionId = req.query.sessionId;
     if (!sessionId) {
         res.render('vote/invalid/session');
+        return;
     }
 
     const q = await db.getQuestionForVote(sessionId)
